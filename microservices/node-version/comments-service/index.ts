@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 import { v4 as uuid } from "uuid";
 
 type Comment = {
@@ -13,6 +14,7 @@ const comments: Comment[] = [];
 const app: Express = express();
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get("/api/posts/:id/comments", (req: Request, res: Response) => {
   const postId: string = req.params.id;
