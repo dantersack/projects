@@ -2,15 +2,23 @@
 
 ## Setup new ts project
 
-`npm init -y`
+```
+npm init -y
+```
 
-`npm i typescript ts-node @types/node --save-dev`
+```
+npm i typescript ts-node @types/node --save-dev
+```
 
-`npx tsc --init`
+```
+npx tsc --init
+```
 
 ## Setup jest with ts
 
-`npm i --save-dev jest @types/jest @babel/core @babel/preset-env @babel/preset-typescript babel-jest`
+```
+npm i --save-dev jest @types/jest @babel/core @babel/preset-env @babel/preset-typescript babel-jest
+```
 
 ### Create `babel.config.js` file
 
