@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { port, server } from "..";
+import { EVENT_BUS_URL, port, server } from "..";
 
 const BASE_URL = `http://localhost:${port}/api/posts`;
 
@@ -31,5 +31,13 @@ describe("test comments service endpoints", () => {
     expect(comment).toHaveProperty("id");
     expect(comment).toHaveProperty("content");
     expect(comment).toHaveProperty("postId", postId);
+  });
+
+  test("should emit a CommentCreated event", async () => {
+    const response = await axios.post(EVENT_BUS_URL, {
+      type: "CommentCreated",
+      data: { id: "", content: "", postId: "" },
+    });
+    expect(response.status).toBe(201);
   });
 });

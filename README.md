@@ -1,5 +1,15 @@
 # Quickstart commands
 
+## Docker commands
+
+```
+docker run -e POSTGRES_PASSWORD=postgres --name=pg --rm -d -p 5432:5432 postgres:14
+```
+
+```
+docker exec -u postgres -it pg psql
+```
+
 ## Setup new ts project
 
 ```
@@ -7,7 +17,7 @@ npm init -y
 ```
 
 ```
-npm i typescript ts-node @types/node --save-dev
+npm i --save-dev typescript ts-node @types/node
 ```
 
 ```
