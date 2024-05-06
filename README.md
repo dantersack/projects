@@ -10,6 +10,12 @@ docker run -e POSTGRES_PASSWORD=postgres --name=pg --rm -d -p 5432:5432 postgres
 docker exec -u postgres -it pg psql
 ```
 
+## Setup new go project
+
+```
+go mod init github.com/dantersack/{name_of_the_project}
+```
+
 ## Setup new ts project
 
 ```
