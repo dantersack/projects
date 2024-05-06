@@ -1,15 +1,16 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
 )
 
 type Product struct {
-	Id          int
-	Description string
-	Price       float64
+	Id          int     `json:"id"`
+	Description string  `json:"description"`
+	Price       float64 `json:"price"`
 }
 
 var id int = 0
@@ -40,7 +41,12 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /products", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Products: %v", products)
+		jsonData, err := json.Marshal(products)
+		if err != nil {
+			fmt.Fprintf(w, "An error occurred")
+			return
+		}
+		fmt.Fprintf(w, "Products: %v", string(jsonData))
 	})
 
 	mux.HandleFunc("GET /products/{id}", func(w http.ResponseWriter, r *http.Request) {
@@ -51,9 +57,14 @@ func main() {
 		searchedProduct, errorWhileSearching := findProduct(numericId, products)
 		if errorWhileSearching != nil {
 			fmt.Fprintf(w, "Error! Product not found!")
-		} else {
-			fmt.Fprintf(w, "Product found: %v", searchedProduct)
+			return
 		}
+		jsonData, jsonError := json.Marshal(searchedProduct)
+		if jsonError != nil {
+			fmt.Fprintf(w, "An error occurred")
+			return
+		}
+		fmt.Fprintf(w, "Product found: %v", string(jsonData))
 	})
 
 	mux.HandleFunc("POST /products", func(w http.ResponseWriter, r *http.Request) {
