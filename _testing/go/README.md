@@ -10,6 +10,14 @@ go test .
 go test -v .
 ```
 
+```
+go test -run Test_{pattern}
+```
+
+```
+go test -v -run Test_{pattern}
+```
+
 ## Test coverage
 
 ### See test coverage %
