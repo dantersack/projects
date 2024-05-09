@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bufio"
+	"bytes"
 	"io"
 	"os"
 	"strings"
@@ -75,4 +77,53 @@ func Test_intro(t *testing.T) {
 	if !strings.Contains(string(out), "Enter a number") {
 		t.Errorf("Incorrect intro text; got: \n'''\n%s\n'''", string(out))
 	}
+}
+
+func Test_checkNumbers(t *testing.T) {
+	tests := []struct {
+		testName        string
+		testInput       string
+		expectedMessage string
+	}{
+		{testName: "test empty input", testInput: "", expectedMessage: "Please enter a valid number!"},
+		{testName: "test zero", testInput: "0", expectedMessage: "0 is not prime, by definition"},
+		{testName: "test one", testInput: "1", expectedMessage: "1 is not prime, by definition"},
+		{testName: "test two", testInput: "2", expectedMessage: "2 is prime"},
+		{testName: "test three", testInput: "3", expectedMessage: "3 is prime"},
+		{testName: "test negative number", testInput: "-1", expectedMessage: "Negative numbers are not prime, by definition"},
+		{testName: "test typed numbers", testInput: "three", expectedMessage: "Please enter a valid number!"},
+		{testName: "test decimal numbers", testInput: "1.1", expectedMessage: "Please enter a valid number!"},
+		{testName: "test q", testInput: "q", expectedMessage: ""},
+		{testName: "test Q", testInput: "Q", expectedMessage: ""},
+	}
+
+	for _, e := range tests {
+		input := strings.NewReader(e.testInput)
+		reader := bufio.NewScanner(input)
+		msg, _ := checkNumbers(reader)
+
+		if !strings.EqualFold(e.expectedMessage, msg) {
+			t.Errorf("%s failed: Expected %s but got %s", e.testName, e.expectedMessage, msg)
+		}
+	}
+}
+
+// This test make sure that:
+//  1. The goroutine fires
+//  2. Take some values
+//  3. Does something with them
+//  4. Quits when it's told to
+func Test_readUserInput(t *testing.T) {
+	// To test this function we need a channel
+	doneChan := make(chan bool)
+
+	// And an instance of io.Reader
+	// For that, create a reference to a bytes.Buffer
+	var stdin bytes.Buffer
+
+	stdin.Write([]byte("1\nq\n"))
+
+	go readUserInput(&stdin, doneChan)
+	<-doneChan // wait for doneChat to finish
+	close(doneChan)
 }
