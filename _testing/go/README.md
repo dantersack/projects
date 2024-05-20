@@ -18,6 +18,12 @@ go test -run Test_{pattern}
 go test -v -run Test_{pattern}
 ```
 
+## Run all tests in the current folder and subsequents subfolders
+
+```
+go test ./...
+```
+
 ## Test coverage
 
 ### See test coverage %
