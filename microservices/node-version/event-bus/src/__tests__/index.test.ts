@@ -13,24 +13,54 @@ afterAll(() => {
 });
 
 describe("should notify event to subscribed listeners", () => {
-  test("should notify event to Posts service", async () => {
+  // Posts
+  test("should notify PostCreated event to Posts service", async () => {
     const postServiceResponse = await axios.post(POSTS_SERVICE_BASE_URL, {
       type: "PostCreated",
     });
     expect(postServiceResponse.status).toBe(200);
   });
+  test("should notify CommentCreated event to Posts service", async () => {
+    const commentServiceResponse = await axios.post(POSTS_SERVICE_BASE_URL, {
+      type: "CommentCreated",
+    });
+    expect(commentServiceResponse.status).toBe(200);
+  });
 
-  test("should notify event to Comments service", async () => {
+  // Comments
+  test("should notify PostCreated event to Comments service", async () => {
+    const postServiceResponse = await axios.post(COMMENTS_SERVICE_BASE_URL, {
+      type: "PostCreated",
+    });
+    expect(postServiceResponse.status).toBe(200);
+  });
+  test("should notify CommentCreated event to Comments service", async () => {
     const commentServiceResponse = await axios.post(COMMENTS_SERVICE_BASE_URL, {
       type: "CommentCreated",
     });
     expect(commentServiceResponse.status).toBe(200);
   });
 
-  test("should notify event to Query service", async () => {
-    const queryServiceResponse = await axios.post(QUERY_SERVICE_BASE_URL, {
-      type: "???",
+  // Query
+  test("should notify PostCreated event to Query service", async () => {
+    const postServiceResponse = await axios.post(QUERY_SERVICE_BASE_URL, {
+      type: "PostCreated",
+      data: {
+        id: "post-id",
+        title: "post title",
+      },
     });
-    expect(queryServiceResponse.status).toBe(200);
+    expect(postServiceResponse.status).toBe(200);
+  });
+  test("should notify CommentCreated event to Query service", async () => {
+    const commentServiceResponse = await axios.post(QUERY_SERVICE_BASE_URL, {
+      type: "CommentCreated",
+      data: {
+        id: "comment-id",
+        content: "comment content",
+        postId: "post-id",
+      },
+    });
+    expect(commentServiceResponse.status).toBe(200);
   });
 });
