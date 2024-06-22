@@ -13,6 +13,8 @@ type Event = {
   data: Record<string, unknown>;
 };
 
+const events: Array<Event> = [];
+
 export const port = "8085";
 
 const app: Express = express();
@@ -20,9 +22,14 @@ const app: Express = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+app.get("/events", (req: Request, res: Response) => {
+  res.status(200).json(events);
+});
+
 app.post("/events", (req: Request, res: Response) => {
+  const event: Event = req.body;
+  events.push(event);
   try {
-    const event: Event = req.body;
     axios.post(POSTS_SERVICE_BASE_URL, event);
     axios.post(COMMENTS_SERVICE_BASE_URL, event);
     axios.post(QUERY_SERVICE_BASE_URL, event);
