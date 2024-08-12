@@ -39,83 +39,25 @@ const testCases = [
 ];
 
 describe("https://leetcode.com/problems/two-sum/", () => {
-  it("should pass test case #1", () => {
-    const { nums, target, outputs } = testCases[0];
-    const output = twoSum(nums, target);
+  for (let i = 0; i < testCases.length; i++) {
+    it(`should pass test case #${i + 1}`, () => {
+      const { nums, target, outputs } = testCases[i];
+      const output = twoSum(nums, target);
 
-    let firstAssertionPassed = false;
-    let secondAssertionPassed = false;
+      let firstAssertionPassed = false;
+      let secondAssertionPassed = false;
 
-    try {
-      assert.deepStrictEqual(output, outputs[0]);
-      firstAssertionPassed = true;
-    } catch (error) {}
+      try {
+        assert.deepStrictEqual(output, outputs[0]);
+        firstAssertionPassed = true;
+      } catch (error) {}
 
-    try {
-      assert.deepStrictEqual(output, outputs[1]);
-      secondAssertionPassed = true;
-    } catch (error) {}
+      try {
+        assert.deepStrictEqual(output, outputs[1]);
+        secondAssertionPassed = true;
+      } catch (error) {}
 
-    assert(firstAssertionPassed || secondAssertionPassed);
-  });
-
-  it("should pass test case #2", () => {
-    const { nums, target, outputs } = testCases[1];
-    const output = twoSum(nums, target);
-
-    let firstAssertionPassed = false;
-    let secondAssertionPassed = false;
-
-    try {
-      assert.deepStrictEqual(output, outputs[0]);
-      firstAssertionPassed = true;
-    } catch (error) {}
-
-    try {
-      assert.deepStrictEqual(output, outputs[1]);
-      secondAssertionPassed = true;
-    } catch (error) {}
-
-    assert(firstAssertionPassed || secondAssertionPassed);
-  });
-
-  it("should pass test case #3", () => {
-    const { nums, target, outputs } = testCases[2];
-    const output = twoSum(nums, target);
-
-    let firstAssertionPassed = false;
-    let secondAssertionPassed = false;
-
-    try {
-      assert.deepStrictEqual(output, outputs[0]);
-      firstAssertionPassed = true;
-    } catch (error) {}
-
-    try {
-      assert.deepStrictEqual(output, outputs[1]);
-      secondAssertionPassed = true;
-    } catch (error) {}
-
-    assert(firstAssertionPassed || secondAssertionPassed);
-  });
-
-  it("should pass test case #4", () => {
-    const { nums, target, outputs } = testCases[3];
-    const output = twoSum(nums, target);
-
-    let firstAssertionPassed = false;
-    let secondAssertionPassed = false;
-
-    try {
-      assert.deepStrictEqual(output, outputs[0]);
-      firstAssertionPassed = true;
-    } catch (error) {}
-
-    try {
-      assert.deepStrictEqual(output, outputs[1]);
-      secondAssertionPassed = true;
-    } catch (error) {}
-
-    assert(firstAssertionPassed || secondAssertionPassed);
-  });
+      assert(firstAssertionPassed || secondAssertionPassed);
+    });
+  }
 });
