@@ -3,6 +3,7 @@
  * @param {number[]} nums
  * @return {number}
  */
+// Big O(NlogN) ??
 function longestConsecutiveSequence(nums) {
   const set = new Set(nums);
   const sortedNums = Array.from(set).sort((a, b) => a - b);
