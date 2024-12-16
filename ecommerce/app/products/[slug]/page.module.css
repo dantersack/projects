@@ -1,0 +1,20 @@
+.productCard {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.productCard h1 {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.description {
+  padding-bottom: 10px;
+}
+
+.price {
+  text-align: right;
+  font-weight: bold;
+}

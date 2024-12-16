@@ -1,0 +1,49 @@
+.h1 {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.form {
+  border: 1px solid black;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+}
+
+.formTitle,
+.formButton {
+  grid-column: span 2;
+}
+
+.productsListContainer {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.listContainer li {
+  color: black;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.listContainer a {
+  text-decoration: none;
+  color: black;
+}
+
+.listContainer a:visited {
+  color: black;
+}
+
+.listContainer a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.noProductsYet {
+  text-align: center;
+}
